@@ -2,7 +2,7 @@
   "name": "comm",
   "version": "1.0.0",
   "description": "A cross-platform messaging application built with React Native, Expo, and Firebase.",
-  "main": "index.ts",
+  "main": "./app/index.tsx",
   "directories": {
     "doc": "docs"
   },
