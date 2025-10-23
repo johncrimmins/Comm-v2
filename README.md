@@ -1,50 +1,125 @@
-# Welcome to your Expo app 👋
+# Comm - Real-Time Messaging App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross-platform messaging application built with React Native, Expo, and Firebase.
 
-## Get started
+## Features
 
-1. Install dependencies
+- One-on-one messaging
+- Group chat
+- Real-time message synchronization
+- Offline support with local SQLite storage
+- Firebase Authentication
 
-   ```bash
-   npm install
-   ```
+## Prerequisites
 
-2. Start the app
+Before you begin, ensure you have the following installed:
 
-   ```bash
-   npx expo start
-   ```
+- **Node.js** (v18 or later)
+- **npm** or **yarn**
+- **Expo CLI** (`npm install -g expo-cli`)
+- **iOS Simulator** (Mac only) or **Android Emulator**
+- **Firebase Project** (see Firebase Setup below)
 
-In the output, you'll find options to open the app in a
+## Setup Instructions
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+### 1. Clone the Repository
 
 ```bash
-npm run reset-project
+git clone <repository-url>
+cd comm
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Install Dependencies
 
-## Learn more
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### 3. Firebase Setup
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+1. Go to [Firebase Console](https://console.firebase.google.com)
+2. Create a new project named "Comm"
+3. Enable **Firestore Database** in test mode
+4. Enable **Authentication** with Email/Password provider
+5. Go to Project Settings > General > Your apps
+6. Add a Web app and copy the Firebase configuration
 
-## Join the community
+### 4. Configure Environment Variables
 
-Join our community of developers creating universal apps.
+1. Copy the `.env.example` file to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+2. Edit `.env` and add your Firebase credentials:
+   ```
+   EXPO_PUBLIC_FIREBASE_API_KEY=your_api_key
+   EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+   EXPO_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+   EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+   EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   EXPO_PUBLIC_FIREBASE_APP_ID=your_app_id
+   ```
+
+### 5. Run the App
+
+```bash
+npx expo start
+```
+
+Then:
+- Press `i` for iOS simulator
+- Press `a` for Android emulator
+- Scan QR code with Expo Go app on your phone
+
+## Project Structure
+
+```
+comm/
+├── app/                    # Expo Router screens
+├── components/             # Reusable UI components
+├── hooks/                  # Custom React hooks
+├── services/              # Business logic
+│   ├── auth/              # Authentication service
+│   ├── firebase/          # Firebase configuration
+│   ├── messaging/         # Messaging operations
+│   ├── sync/              # Sync engine
+│   ├── sqlite/            # Local database
+│   ├── notifications/     # Push notifications
+│   └── presence/          # User presence
+├── store/                 # Global state management
+├── types/                 # TypeScript definitions
+├── utils/                 # Utility functions
+├── constants/             # App constants
+└── assets/                # Images and fonts
+```
+
+## Tech Stack
+
+- **Frontend**: React Native 0.73.x with TypeScript 5.x
+- **Framework**: Expo SDK 50.x
+- **Navigation**: Expo Router 3.x
+- **Backend**: Firebase (Firestore + Authentication)
+- **Local Storage**: Expo SQLite
+- **State Management**: React Context + Hooks
+
+## Development
+
+### Testing
+
+Manual testing on device/simulator is the primary testing method for MVP.
+
+### Hot Reload
+
+The app supports hot reload during development. Changes to code will automatically refresh the app.
+
+## Firebase Configuration Notes
+
+- This app uses **Firebase JS SDK 9.x** for Expo compatibility
+- Environment variables must use the `EXPO_PUBLIC_` prefix
+- The `.env` file is gitignored - never commit Firebase credentials
+- Firestore is initially in test mode; security rules will be added in future stories
+
+## License
+
+MIT
